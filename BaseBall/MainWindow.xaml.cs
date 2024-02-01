@@ -60,7 +60,7 @@ namespace BaseBall
             // 110 進塁(*2 = 6)
             // 2塁打は3進める、ヒットは50%で2進めるがいいか？
 
-            new Team();
+            new Game();
 
         }
     }
