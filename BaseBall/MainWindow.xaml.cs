@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BaseBall.Model;
 
 namespace BaseBall
 {
@@ -58,6 +59,7 @@ namespace BaseBall
             // 011 シングルヒット(+1=3)
             // 110 進塁(*2 = 6)
             // 2塁打は3進める、ヒットは50%で2進めるがいいか？
+
 
         }
     }
