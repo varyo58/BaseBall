@@ -27,60 +27,56 @@ namespace BaseBall
         {
             Debug.WriteLine("Start.");
 
-            var player1 = new Player(70, 70, 70);
-            Debug.WriteLine("------Player1------");
-            Player.Simulate(player1, 500);
 
-            var player2 = new Player(60, 85, 60);
-            Debug.WriteLine("------Player2------");
-            Player.Simulate(player2, 500);
+            var sankan = new Player("三冠王", 85, 85, 83);
+            var homerunKing = new Player("主砲", 88, 65, 88);
+            var ahetan = new Player("アヘ単", 50, 85, 50);
+            var freeSwinger = new Player("パワー系助っ人", 67, 58, 88);
+            var syubisen = new Player("守備の人", 60, 63, 53);
+            var nopower = new Player("非力", 45, 75, 50);
+            var romam = new Player("ロマン砲", 60, 55, 82);
+            var ibushi = new Player("いぶし銀", 70, 62, 60);
+            var chukyori = new Player("巧打者", 72, 75, 72);
 
-            var player3 = new Player(85, 60, 85);
-            Debug.WriteLine("------Player3------");
-            Player.Simulate(player3, 500);
+            var game = new Game(
+                sankan,
+                homerunKing,
+                ahetan,
+                freeSwinger,
+                syubisen,
+                nopower,
+                romam,
+                ibushi,
+                chukyori);
 
-            var sankan = new Player(75, 85, 85);
-            Debug.WriteLine("------sankan------");
-            Player.Simulate(sankan, 500);
+            //game.PlayGame();
 
-            var homerunKing = new Player(85, 65, 90);
-            Debug.WriteLine("------homerunKing------");
-            Player.Simulate(homerunKing, 500);
+            Debug.WriteLine($@"------{sankan.Name}-----");
+            Player.Simulate(sankan, 5000);
 
-            var ahetan = new Player(50, 85, 50);
-            Debug.WriteLine("------ahetan------");
-            Player.Simulate(ahetan, 500);
+            Debug.WriteLine($@"------{homerunKing.Name}-----");
+            Player.Simulate(homerunKing, 5000);
 
-            var freeSwinger = new Player(67, 55, 88);
-            Debug.WriteLine("------freeSwinger------");
-            Player.Simulate(freeSwinger, 500);
+            Debug.WriteLine($@"------{ahetan.Name}-----");
+            Player.Simulate(ahetan, 5000);
 
-            var syubisen = new Player(60, 60, 55);
-            Debug.WriteLine("------syubisen------");
-            Player.Simulate(syubisen, 500);
+            Debug.WriteLine($@"------{freeSwinger.Name}-----");
+            Player.Simulate(freeSwinger, 5000);
 
-            var nopower = new Player(45, 80, 45);
-            Debug.WriteLine("------nopower------");
-            Player.Simulate(nopower, 500);
-            //int hitCnt = 0;
-            //for (int i = 0; i < 1000; i++)
-            //{
-            //    var result = Player.Batting(player);
-            //    if (result == HittingResult.Out)
-            //    {
-            //        //Debug.WriteLine($"第{i}打席：OUT");
-            //    }
-            //    else
-            //    {
-            //        hitCnt++;
-            //        //Debug.WriteLine($"第{i}打席：HIT");
+            Debug.WriteLine($@"------{syubisen.Name}-----");
+            Player.Simulate(syubisen, 5000);
 
-            //    }
+            Debug.WriteLine($@"------{nopower.Name}-----");
+            Player.Simulate(nopower, 5000);
 
+            Debug.WriteLine($@"------{romam.Name}-----");
+            Player.Simulate(romam, 5000);
 
-            //}
+            Debug.WriteLine($@"------{ibushi.Name}-----");
+            Player.Simulate(ibushi, 5000);
 
-            //Debug.WriteLine($"ヒット数：{hitCnt}");
+            Debug.WriteLine($@"------{chukyori.Name}-----");
+            Player.Simulate(chukyori, 5000);
 
             // TODO
             // Teamクラス、Gameクラス
@@ -99,16 +95,19 @@ namespace BaseBall
 
     public class Player
     {
+        public string Name { get; }
         public int Senkyu { get; }
         public int Meet { get; }
         public int Power { get; }
+        public PlayerRecord Record { get; set; }
 
-
-        public Player(int senkyu, int meet, int power)
+        public Player(string name, int senkyu, int meet, int power)
         {
             Senkyu = senkyu;
             Meet = meet;
             Power = power;
+            Name = name;
+            Record = new PlayerRecord();
         }
 
         public static HittingResult Batting(Player player)
@@ -127,7 +126,7 @@ namespace BaseBall
                 tempPower = (int)Math.Pow((double)tempPower, 2) / (decimal)100;
                 //tempPower = player.Power - 50;
                 //if (tempPower < 0) tempPower = 1;
-                decimal homerunRitsu = (decimal)(tempPower * (decimal)15.0 / 1000);
+                decimal homerunRitsu = (decimal)(tempPower * (decimal)14.0 / 1000);
                 random = (decimal)new Random().Next(0, 999) / 1000;
                 if (random < homerunRitsu)
                 {
@@ -157,7 +156,10 @@ namespace BaseBall
             }
 
             // 四球判定
-            decimal shikyuRitsu = (decimal)(player.Senkyu * 2.0 / 1000);
+            // もうちょっと差をつけたい。
+            var tempSenkyu = player.Senkyu - 30;
+            if (tempSenkyu < 0) tempSenkyu = 1;
+            decimal shikyuRitsu = (decimal)(tempSenkyu * 2.3 / 1000);
             random = (decimal)new Random().Next(0, 999) / 1000;
 
             if (random < shikyuRitsu)
@@ -238,6 +240,28 @@ namespace BaseBall
 
 
         }
+
+    }
+
+    public class PlayerRecord
+    {
+        public PlayerRecord()
+        {
+            OneBaseCnt = 0;
+            TwoBaseCnt = 0;
+            ThreeBaseCnt = 0;
+            HomerunCnt = 0;
+            FourBallCnt = 0;
+            DasekiCnt = 0;
+        }
+
+        public int OneBaseCnt { get; set; }
+        public int TwoBaseCnt { get; set; }
+        public int ThreeBaseCnt { get; set; }
+        public int HomerunCnt { get; set; }
+        public int FourBallCnt { get; set; }
+        public int DasekiCnt { get; set; }
+
 
     }
 
