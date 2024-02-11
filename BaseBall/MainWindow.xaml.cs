@@ -49,34 +49,36 @@ namespace BaseBall
                 ibushi,
                 chukyori);
 
-            //game.PlayGame();
+            game.PlayGame();
 
-            Debug.WriteLine($@"------{sankan.Name}-----");
-            Player.Simulate(sankan, 5000);
+            // TODO 出力をロガークラスにまとめたい
 
-            Debug.WriteLine($@"------{homerunKing.Name}-----");
-            Player.Simulate(homerunKing, 5000);
+            //Debug.WriteLine($@"------{sankan.Name}-----");
+            //Player.Simulate(sankan, 5000);
 
-            Debug.WriteLine($@"------{ahetan.Name}-----");
-            Player.Simulate(ahetan, 5000);
+            //Debug.WriteLine($@"------{homerunKing.Name}-----");
+            //Player.Simulate(homerunKing, 5000);
 
-            Debug.WriteLine($@"------{freeSwinger.Name}-----");
-            Player.Simulate(freeSwinger, 5000);
+            //Debug.WriteLine($@"------{ahetan.Name}-----");
+            //Player.Simulate(ahetan, 5000);
 
-            Debug.WriteLine($@"------{syubisen.Name}-----");
-            Player.Simulate(syubisen, 5000);
+            //Debug.WriteLine($@"------{freeSwinger.Name}-----");
+            //Player.Simulate(freeSwinger, 5000);
 
-            Debug.WriteLine($@"------{nopower.Name}-----");
-            Player.Simulate(nopower, 5000);
+            //Debug.WriteLine($@"------{syubisen.Name}-----");
+            //Player.Simulate(syubisen, 5000);
 
-            Debug.WriteLine($@"------{romam.Name}-----");
-            Player.Simulate(romam, 5000);
+            //Debug.WriteLine($@"------{nopower.Name}-----");
+            //Player.Simulate(nopower, 5000);
 
-            Debug.WriteLine($@"------{ibushi.Name}-----");
-            Player.Simulate(ibushi, 5000);
+            //Debug.WriteLine($@"------{romam.Name}-----");
+            //Player.Simulate(romam, 5000);
 
-            Debug.WriteLine($@"------{chukyori.Name}-----");
-            Player.Simulate(chukyori, 5000);
+            //Debug.WriteLine($@"------{ibushi.Name}-----");
+            //Player.Simulate(ibushi, 5000);
+
+            //Debug.WriteLine($@"------{chukyori.Name}-----");
+            //Player.Simulate(chukyori, 5000);
 
             // TODO
             // Teamクラス、Gameクラス
@@ -273,5 +275,24 @@ namespace BaseBall
         ThreeBase = 3,
         Homerun = 4,
         FourBall = 6,
+    }
+
+    public static class HittingResultExtension
+    {
+        private static Dictionary<HittingResult, string> viewStrDictionary = new Dictionary<HittingResult, string>()
+        {
+            {HittingResult.Out,"アウト" },
+            {HittingResult.SingleHit,"ヒット" },
+            {HittingResult.TwoBase,"二塁打" },
+            {HittingResult.ThreeBase,"三塁打" },
+            {HittingResult.Homerun,"ホームラン" },
+            {HittingResult.FourBall,"四球" },
+
+        };
+        public static string ToResultString(this HittingResult result)       //<-　拡張メソッド
+        {
+            return viewStrDictionary[result];
+        }
+
     }
 }
