@@ -18,6 +18,8 @@ namespace BaseBall
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static BaseBallLogger log = BaseBallLogger.GetInstance("baseball.log", false);
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,6 +40,17 @@ namespace BaseBall
             var ibushi = new Player("いぶし銀", 70, 62, 60);
             var chukyori = new Player("巧打者", 72, 75, 72);
 
+            //var team = new Team(
+            //    ahetan,
+            //    ibushi,
+            //    sankan,
+            //    homerunKing,
+            //    freeSwinger,
+            //    syubisen,
+            //    nopower,
+            //    romam,
+            //    chukyori);
+
             var team = new Team(
                 sankan,
                 homerunKing,
@@ -49,8 +62,9 @@ namespace BaseBall
                 ibushi,
                 chukyori);
 
-            var game = new Game(team);
-            game.PlayGame();
+            var game = new Game(team, 144);
+            //game.PlayGame();
+            game.PlaySeason();
 
             // TODO 出力をロガークラスにまとめたい
 

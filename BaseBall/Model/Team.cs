@@ -35,4 +35,16 @@ public class Team
         return nextBatter;
     }
 
+    /// <summary>
+    /// 選手記録を通算。打順を0にリセット
+    /// </summary>
+    public void SummaryRecord()
+    {
+        foreach (var player in Players)
+        {
+            player.SummaryRecord();
+        }
+
+        Current = 0;
+    }
 }

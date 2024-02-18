@@ -9,12 +9,14 @@ public class Player
     private readonly int _meet;
     private readonly int _power;
     private readonly PlayerRecord _record;
+    private readonly PlayerRecord _totalRecord;
 
     public string Name => _name;
     public int Senkyu => _senkyu;
     public int Meet => _meet;
     public int Power => _power;
     public PlayerRecord Record => _record;
+    public PlayerRecord TotalRecord => _totalRecord;
 
     public Player(string name, int senkyu, int meet, int power)
     {
@@ -23,10 +25,24 @@ public class Player
         _power = power;
         _name = name;
         _record = new PlayerRecord();
+        _totalRecord = new PlayerRecord();
+
     }
 
-    // TODO 試合終了時、レコードを通算記録に移してリセット
+    /// <summary>
+    /// 試合記録を通算記録に移してリセット
+    /// </summary>
+    public void SummaryRecord()
+    {
+        _totalRecord.AddRecord(_record);
+        _record.ResetRecord();
+    }
 
+    /// <summary>
+    /// 打席の結果を記録
+    /// </summary>
+    /// <param name="result"></param>
+    /// <param name="daten"></param>
     public void WriteRecord(HittingResult result, int daten)
     {
         _record.DasekiCnt++;

@@ -27,4 +27,27 @@ public class PlayerRecord
     public decimal ChodaRitsu => (OneBaseCnt + TwoBaseCnt * 2 + ThreeBaseCnt * 3 + HomerunCnt * 4) / (decimal)DasuCnt;
 
     public string RecordString => @$"{DasekiCnt}打席{DasuCnt}打数{HitCnt}安打{Daten}打点";
+
+    public void AddRecord(PlayerRecord record)
+    {
+        OneBaseCnt += record.OneBaseCnt;
+        TwoBaseCnt += record.TwoBaseCnt;
+        ThreeBaseCnt += record.ThreeBaseCnt;
+        HomerunCnt += record.HomerunCnt;
+        FourBallCnt += record.FourBallCnt;
+        DasekiCnt += record.DasekiCnt;
+        Daten += record.Daten;
+    }
+
+    public void ResetRecord()
+    {
+        OneBaseCnt = 0;
+        TwoBaseCnt = 0;
+        ThreeBaseCnt = 0;
+        HomerunCnt = 0;
+        FourBallCnt = 0;
+        DasekiCnt = 0;
+        Daten = 0;
+    }
+
 }
