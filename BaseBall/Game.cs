@@ -45,7 +45,7 @@ public class Game
             {
                 var daten = 0;
                 var nowPlayer = Team.NextBatter();
-                var hittingResult =  Player.Batting(nowPlayer);
+                var hittingResult = nowPlayer.Batting();
 
                 log.write($@" バッター：{nowPlayer.Name}");
                 log.write($@" 結果：{hittingResult.ToResultString()}");

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,17 +14,49 @@ using BaseBall.Model;
 
 namespace BaseBall
 {
+
+    public class MainWindowVM : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string PropertyName)
+        {
+            var e = new PropertyChangedEventArgs(PropertyName);
+            PropertyChanged?.Invoke(this, e);
+        }
+
+        public Player Player1 { get => _player1;  }
+        private Player _player1;
+
+        public Player Player2 { get => _player2; }
+        private Player _player2;
+
+        public MainWindowVM()
+        {
+            _player1 = new Player("三冠王", 85, 85, 83);
+            _player2 = new Player("主砲", 88, 65, 88);
+
+            _player1.Simulate(500);
+            _player2.Simulate(500);
+
+        }
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         private static BaseBallLogger log = BaseBallLogger.GetInstance("baseball.log", false);
+        private MainWindowVM vm = new MainWindowVM();
 
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = vm;
         }
+
+
 
         private void button_Click(object sender, RoutedEventArgs e)
         {

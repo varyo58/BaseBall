@@ -5,9 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BaseBall"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
-        <Button x:Name="button" Content="Play" HorizontalAlignment="Left" Margin="55,63,0,0" VerticalAlignment="Top" Click="button_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="297*"/>
+            <ColumnDefinition Width="103*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="325*"/>
+            <RowDefinition Height="109*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock>１番:</TextBlock>
+                <TextBlock>名前</TextBlock>
+                <TextBox Width="50" Text="{Binding Player1.Name}"></TextBox>
+                <TextBlock>選球眼</TextBlock>
+                <TextBox Width="50" Text="{Binding Player1.Senkyu}"></TextBox>
+                <TextBlock>ミート</TextBlock>
+                <TextBox Width="50" Text="{Binding Player1.Meet}"></TextBox>
+                <TextBlock>パワー</TextBlock>
+                <TextBox Width="50" Text="{Binding Player1.Power}"></TextBox>
+                <TextBlock>想定成績</TextBlock>
+                <TextBox Width="300" Text="{Binding Player1.SimRecord.RecordStringWithOutDaten, Mode=OneWay}"></TextBox>
+
+            </StackPanel>
+            <!--TODO 階層バインディング-->
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock>２番:</TextBlock>
+                <TextBlock>名前</TextBlock>
+                <TextBox Width="50" Text="{Binding Player2.Name}"></TextBox>
+                <TextBlock>選球眼</TextBlock>
+                <TextBox Width="50" Text="{Binding Player2.Senkyu}"></TextBox>
+                <TextBlock>ミート</TextBlock>
+                <TextBox Width="50" Text="{Binding Player2.Meet}"></TextBox>
+                <TextBlock>パワー</TextBlock>
+                <TextBox Width="50" Text="{Binding Player2.Power}"></TextBox>
+                <TextBlock>想定成績</TextBlock>
+                <TextBox Width="300" Text="{Binding Player2.SimRecord.RecordStringWithOutDaten, Mode=OneWay}"></TextBox>
+
+            </StackPanel>
+        </StackPanel>
+
+
+        <Button x:Name="button" Content="Play" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Click="button_Click" Height="20" Width="26" Grid.Row ="1" Grid.Column="1"/>
 
     </Grid>
 </Window>
